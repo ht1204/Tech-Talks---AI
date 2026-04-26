@@ -1,0 +1,17 @@
+{
+  "name": "dev-agent-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Proxy server for AI Development Agent",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

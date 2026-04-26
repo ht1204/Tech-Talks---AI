@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dropdown-container">
+        <label for="ai-dropdown">AI Model:</label>
+        <select id="ai-dropdown">
+            <option value="gpt">GPT</option>
+            <option value="claude">Claude</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+    <div class="chat-container">
+
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
