@@ -1,0 +1,59 @@
+Ollama - Running LLMs Locally
+
+Ollama is an open-source tool that makes it easy to run large language models locally on your machine. It handles model downloading, optimization, and serving through a simple API, making local LLM deployment as easy as running a Docker container.
+
+Getting Started with Ollama
+
+Installation:
+- macOS: Download from ollama.com or use "brew install ollama"
+- Linux: Run "curl -fsSL https://ollama.com/install.sh | sh"
+- Windows: Download the installer from ollama.com
+
+Running Models:
+To download and run a model, simply use:
+  ollama pull llama3.2
+  ollama run llama3.2
+
+This downloads the model weights (typically 2-8 GB depending on the model) and starts an interactive chat session.
+
+Ollama API:
+Ollama exposes a REST API on port 11434 by default. Key endpoints include:
+
+- POST /api/generate: Generate text completions
+- POST /api/chat: Chat-style completions with message history
+- POST /api/embeddings: Generate embedding vectors for text
+- GET /api/tags: List available models
+
+The embeddings endpoint is particularly useful for RAG systems, as it converts text into numerical vectors that can be stored and compared.
+
+Popular Models Available on Ollama
+
+- llama3.2 (1B, 3B): Meta's latest small language models, great for general tasks
+- llama3.1 (8B, 70B, 405B): Meta's larger models with better quality
+- mistral (7B): Mistral AI's efficient model
+- phi-3 (3.8B): Microsoft's small but capable model
+- nomic-embed-text: A specialized embedding model (768-dimensional vectors)
+- mxbai-embed-large: Another high-quality embedding model
+
+Model Sizes and Memory Requirements:
+- 1B-3B parameters: ~2-4 GB RAM, runs on most machines
+- 7B-8B parameters: ~5-8 GB RAM, good balance of quality and speed
+- 13B parameters: ~10-16 GB RAM, noticeable quality improvement
+- 70B parameters: ~40-48 GB RAM, requires high-end hardware
+
+Embedding Models for RAG
+
+For RAG applications, you need two types of models:
+1. An embedding model (e.g., nomic-embed-text) to convert text to vectors
+2. A generation model (e.g., llama3.2) to produce answers
+
+The embedding model should be lightweight and fast since it needs to process many chunks during indexing. The generation model can be larger for better answer quality.
+
+nomic-embed-text produces 768-dimensional vectors and is specifically trained for semantic search tasks. It handles up to 8192 tokens of input, making it suitable for typical chunk sizes.
+
+Advantages of Running LLMs Locally with Ollama:
+- Privacy: Your data never leaves your machine
+- No API costs: Free to run after downloading models
+- Offline capable: Works without internet after initial model download
+- Customizable: Support for model fine-tuning and custom configurations
+- Low latency: No network round-trip for inference

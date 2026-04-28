@@ -1,0 +1,54 @@
+Retrieval-Augmented Generation (RAG) - Technical Overview
+
+Retrieval-Augmented Generation (RAG) is an AI architecture pattern that enhances the output of large language models (LLMs) by grounding them in external knowledge sources. Instead of relying solely on the model's training data, RAG retrieves relevant information from a knowledge base at query time and includes it in the prompt sent to the LLM.
+
+The RAG Pipeline
+
+The RAG process consists of two main phases: Indexing and Querying.
+
+Indexing Phase:
+1. Document Loading: Raw documents (PDFs, text files, web pages) are loaded into the system.
+2. Text Chunking: Documents are split into smaller, semantically meaningful pieces called "chunks." Typical chunk sizes range from 200 to 1000 characters. Overlapping chunks help preserve context across boundaries.
+3. Embedding Generation: Each chunk is converted into a dense numerical vector (embedding) using an embedding model. These vectors capture the semantic meaning of the text in a high-dimensional space.
+4. Vector Storage: The embeddings are stored in a vector database (e.g., ChromaDB, Pinecone, pgvector, FAISS) along with the original text, enabling fast similarity search.
+
+Query Phase:
+1. Question Embedding: The user's question is converted into an embedding vector using the same embedding model.
+2. Similarity Search: The question embedding is compared against all stored chunk embeddings using a distance metric (typically cosine similarity). The top-K most similar chunks are retrieved.
+3. Context Augmentation: The retrieved chunks are inserted into the LLM prompt as context, along with the user's original question.
+4. Answer Generation: The LLM generates an answer based on the provided context, grounding its response in the actual documents.
+
+Why RAG?
+
+RAG solves several fundamental problems with standalone LLMs:
+
+- Knowledge Cutoff: LLMs are frozen at their training date. RAG provides access to current information.
+- Hallucination Reduction: By grounding responses in actual documents, RAG significantly reduces fabricated answers.
+- Domain Specificity: RAG allows any organization to build AI that understands their proprietary data without expensive fine-tuning.
+- Source Attribution: RAG can cite which documents were used to generate an answer, enabling verification.
+- Cost Efficiency: Updating a knowledge base is much cheaper than retraining an LLM.
+
+Key Concepts
+
+Embeddings: Dense vector representations of text that capture semantic meaning. Similar concepts have vectors that are close together in the embedding space. For example, "dog" and "puppy" would have similar embeddings even though the words are different.
+
+Cosine Similarity: A measure of how similar two vectors are, computed as the cosine of the angle between them. A value of 1 means identical direction (most similar), 0 means orthogonal (unrelated), and -1 means opposite direction.
+
+Chunking Strategy: How you split documents significantly impacts retrieval quality. Too small and chunks lose context; too large and they become noisy. Common strategies include fixed-size, paragraph-based, and recursive splitting.
+
+Top-K Retrieval: The number of chunks retrieved per query. More chunks provide more context but can dilute relevance. Typical values are 3-5.
+
+Common RAG Architectures
+
+1. Naive RAG: The simplest form — just embed, retrieve, and generate. This is what most MVPs use.
+2. Advanced RAG: Adds pre-retrieval (query rewriting, expansion) and post-retrieval (reranking, compression) steps.
+3. Modular RAG: Breaks the pipeline into swappable modules that can be independently optimized.
+
+Popular Tools and Frameworks
+
+- LangChain / LlamaIndex: High-level frameworks for building RAG pipelines
+- ChromaDB: Open-source embedding database
+- Pinecone: Managed vector database service
+- FAISS: Facebook's library for efficient similarity search
+- Ollama: Run LLMs locally (Llama, Mistral, etc.)
+- OpenAI API: Cloud-based embeddings and completions

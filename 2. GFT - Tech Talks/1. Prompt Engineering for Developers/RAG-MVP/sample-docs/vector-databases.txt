@@ -1,0 +1,76 @@
+Vector Databases and Similarity Search
+
+Vector databases are specialized storage systems designed to efficiently store, index, and query high-dimensional vector data. They are a critical component in modern AI applications, particularly in Retrieval-Augmented Generation (RAG), recommendation systems, and semantic search.
+
+What Are Vector Embeddings?
+
+An embedding is a numerical representation of data (text, images, audio) as a list of floating-point numbers (a vector). For example, the sentence "The cat sat on the mat" might be represented as a vector of 768 numbers like [0.023, -0.145, 0.892, ...].
+
+The key property of embeddings is that semantically similar content produces vectors that are close together in the vector space. This enables similarity search: given a query vector, find the stored vectors closest to it.
+
+Similarity Metrics
+
+The most common distance/similarity metrics used in vector search:
+
+1. Cosine Similarity: Measures the angle between two vectors. Ranges from -1 to 1. Most popular for text embeddings because it normalizes for vector magnitude.
+   Formula: cos(theta) = (A dot B) / (||A|| * ||B||)
+
+2. Euclidean Distance (L2): Measures the straight-line distance between two points in vector space. Smaller values indicate more similarity.
+
+3. Dot Product: Simply the sum of element-wise products. Fast to compute but sensitive to vector magnitude.
+
+For normalized vectors (unit length), cosine similarity and dot product give the same ranking.
+
+Popular Vector Databases
+
+ChromaDB:
+- Open-source, designed for AI applications
+- Can run in-memory or persisted
+- Python and JavaScript clients
+- Built-in support for metadata filtering
+- Great for prototyping and small-to-medium datasets
+
+Pinecone:
+- Fully managed cloud vector database
+- Scales to billions of vectors
+- Low-latency queries with automatic indexing
+- Paid service with a free tier
+- Best for production deployments
+
+pgvector:
+- PostgreSQL extension for vector similarity search
+- Leverages existing PostgreSQL infrastructure
+- Supports IVFFlat and HNSW indexing algorithms
+- Good choice if you already use PostgreSQL
+- Handles up to millions of vectors efficiently
+
+FAISS (Facebook AI Similarity Search):
+- Library (not a database) for efficient similarity search
+- Extremely fast on large datasets
+- Supports GPU acceleration
+- Used as a building block in many vector databases
+- Best for research and high-performance needs
+
+Weaviate:
+- Open-source vector search engine
+- GraphQL API
+- Built-in vectorization modules
+- Hybrid search (vector + keyword)
+
+Indexing Algorithms
+
+Flat (Brute Force): Compare the query against every stored vector. Gives exact results but does not scale well. O(n) per query.
+
+IVFFlat (Inverted File Index): Clusters vectors into groups. At query time, only searches the nearest clusters. Approximate but much faster. Good for medium datasets.
+
+HNSW (Hierarchical Navigable Small World): Builds a graph structure where similar vectors are connected. Extremely fast approximate search. The most popular algorithm for production vector databases. O(log n) per query.
+
+Practical Considerations
+
+Dimensionality: Most text embedding models produce 384-1536 dimensional vectors. Higher dimensions capture more information but require more storage and slower comparisons.
+
+Indexing Time vs Query Time: Building the index takes time upfront but makes queries fast. For RAG, this tradeoff is favorable since you index once and query many times.
+
+Metadata Filtering: Most vector databases support filtering by metadata alongside similarity search. For example, searching for similar documents but only within a specific category or date range.
+
+In-Memory vs Persistent: For MVPs and demos, in-memory vector stores work fine. For production, you need persistence to survive restarts and handle larger datasets.
