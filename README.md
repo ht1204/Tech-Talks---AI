@@ -24,8 +24,9 @@ A curated collection of AI-focused tech talks, presentations, and hands-on works
 
 | # | Topic | Slides |
 |---|-------|--------|
-| 1 | Prompt Engineering for Developers | - |
+| 1 | Prompt Engineering for Developers | [slides](./2.%20GFT%20-%20Tech%20Talks/1.%20Prompt%20Engineering%20for%20Developers/Prompt%20Engineering%20Techniques%20for%20Developers.pdf) |
 | 2 | AI Agents & Integrations | [slides](./2.%20GFT%20-%20Tech%20Talks/2.%20AI%20Agents%20&%20Integrations/AI%20Agents%20&%20Integrations.pptx) |
+| 3 | Tool Calling | [slides](./2.%20GFT%20-%20Tech%20Talks/3.%20Tool%20Calling/Tool%20Calling.pptx) |
 
 
 
